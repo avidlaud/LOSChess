@@ -1,4 +1,4 @@
-package com.avidlaud;
+package com.LOSChess;
 
 public class Main {
 
