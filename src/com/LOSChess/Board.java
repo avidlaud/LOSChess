@@ -55,14 +55,14 @@ public class Board {
         if(player.isWhite()) {
             finalPos[0] = startPos[0] + fMove;
             finalPos[1] = startPos[1] + rMove;
-            if(finalPos[0] < 1 || finalPos[0] > 8 || finalPos[1] < 1 || finalPos[1] > 8) {
+            if(!validPosition(finalPos)) {
                 return null;
             }
         }
         else { //Black
             finalPos[0] = startPos[0] - fMove;
             finalPos[1] = startPos[1] - rMove;
-            if(finalPos[0] < 1 || finalPos[0] > 8 || finalPos[1] < 1 || finalPos[1] > 8) {
+            if(!validPosition(finalPos)) {
                 return null;
             }
         }
@@ -71,6 +71,14 @@ public class Board {
 
     public Piece checkPos(int[] pos) {
         return board[pieceIndexing(pos)[0]][pieceIndexing(pos)[1]];
+    }
+
+    private static boolean validPosition(int[] pos) {
+        return (!(pos[0] < 1 || pos[0] > 8 || pos[1] < 1 || pos[1] > 8));
+    }
+
+    public void movePiece(Piece piece, int[] destination) {
+
     }
 
 
