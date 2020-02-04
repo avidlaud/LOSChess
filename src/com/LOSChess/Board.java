@@ -43,12 +43,12 @@ public class Board {
     }
 
     /**
-     *
-     * @param player
-     * @param startPos
-     * @param rMove
-     * @param fMove
-     * @return Int array of new {rank, file} or null if off board
+     * Determine the new position of after moving forward x ranks and right y files, from the perspective of a given player.
+     * @param player Player from which to calculate position
+     * @param startPos Int array of {file, rank} for starting position
+     * @param rMove Number of ranks to move, positive indicating moving forward, e.g., 1 -> 3 for white
+     * @param fMove Number of files to move, positive indicating moving right, e.g., F -> D for black
+     * @return Int array of new {file, rank} or null if off board
      */
     public static int[] calcPos(Player player, int[] startPos, int fMove, int rMove) {
         int[] finalPos = {0, 0};
@@ -69,16 +69,36 @@ public class Board {
         return finalPos;
     }
 
+    /**
+     * Check what piece, if any, is in the given board position
+     * @param pos Int array of {file, rank} to check
+     * @return The Piece at the position, or null if empty
+     */
     public Piece checkPos(int[] pos) {
         return board[pieceIndexing(pos)[0]][pieceIndexing(pos)[1]];
     }
 
+    /**
+     * Check if the given location is a valid location on the board, i.e., A-H and 1-8
+     * @param pos Int array for postion to check
+     * @return True if legal position, false if not
+     */
     private static boolean validPosition(int[] pos) {
         return (!(pos[0] < 1 || pos[0] > 8 || pos[1] < 1 || pos[1] > 8));
     }
 
+    /**
+     * Move a piece on the board from one position to another
+     * @param piece The piece to move
+     * @param destination The final destination of the piece
+     */
     public void movePiece(Piece piece, int[] destination) {
-
+        if(!validPosition(destination)) { //Illegal position
+            return;
+        }
+        board[piece.getFile()][piece.getRank()] = null;
+        piece.setPosition(destination);
+        board[destination[0]][destination[1]] = piece;
     }
 
 
