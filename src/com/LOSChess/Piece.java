@@ -55,9 +55,8 @@ public class Piece {
     }
 
     //Will be overridden by the subclasses
-    public ArrayList<int[]> getMoves() {
+    public ArrayList<int[]> getMoves(Board board) {
         return null;
     }
-
 }
 
