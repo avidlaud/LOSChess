@@ -11,7 +11,7 @@ public class Board {
 
     public Board(Player white, Player black) {
         //Initialize pawns
-        for(int i = 1; i <= 8; i++) {
+        for(int i = 0; i <= 7; i++) { // changed from 1-8 to 0-7 b/c didnt work with 1-8
             board[i][Pawn.WHITESTARTRANK-1] = new Pawn(i, white);
             board[i][Pawn.BLACKSTARTRANK-1] = new Pawn(i, black);
         }
@@ -21,6 +21,7 @@ public class Board {
         board[0][7] = new Rook(0, white);
         board[7][7] = new Rook(7, black);
         //Initialize knights
+
         board[1][0] = new Knight(1, white);
         board[6][0] = new Knight(6, white);
         board[1][7] = new Knight(1, black);
@@ -36,10 +37,30 @@ public class Board {
         //Initialize kings
         board[4][0] = new King(4, white);
         board[4][7] = new King(4, black);
+
+
     }
 
     private int[] pieceIndexing(int[] input) {
         return new int[]{input[0]-1, input[1] -1};
+    }
+    public void printBoard(){ //added printBoard for the driver
+        Player temp = new Player();
+        char[][] dispBoard = new char[8][8];
+        for(int rank = 0; rank<board.length; rank++){
+            for(int file = 0; file<board[rank].length; file++){
+                if(board[file][rank] instanceof Pawn) System.out.print("P" + " ");
+                else if(board[file][rank] instanceof Rook) System.out.print("R" + " ");
+                else if(board[file][rank] instanceof Bishop) System.out.print("B" + " ");
+                else if(board[file][rank] instanceof Queen) System.out.print("Q" + " ");
+                else if(board[file][rank] instanceof King) System.out.print("K" + " ");
+                else if(board[file][rank] instanceof Knight) System.out.print("N" + " ");
+                else{
+                    System.out.print("- ");
+                }
+            }
+            System.out.println();
+        }
     }
 
     /**
