@@ -29,10 +29,25 @@ public class Pawn extends Piece{
             moves.add(Board.calcPos(getPlayer(), getPosition(), 1, 1));
         }
         if(board.checkPos(Board.calcPos(getPlayer(), getPosition(), -1, 1)).getPlayer() != getPlayer()) {
-            
+            moves.add(Board.calcPos(getPlayer(), getPosition(), -1, 1));
         }
-
         return moves;
+    }
+
+    /**
+     * Move pawn to a new location
+     * @param destination Int array of {file, rank} for destination on board
+     * @param board Board used
+     * @return True if successfully moved pawn, false otherwise
+     */
+    public boolean move(int[] destination, Board board) {
+        if(!getMoves(board).contains(destination)) { //Illegal move
+            return false;
+        }
+        else {
+            board.movePiece(this, destination);
+            return true;
+        }
     }
 
 }
