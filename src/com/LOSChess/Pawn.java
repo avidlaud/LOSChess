@@ -20,11 +20,16 @@ public class Pawn extends Piece{
     @Override
     public ArrayList<int[]> getMoves(Board board) {
         ArrayList<int[]> moves = new ArrayList<>();
-        //First move - able to move up two
-        if(getNumMoves() == 0) {
-            moves.add(Board.calcPos(getPlayer(), getPosition(), 0, 2));
+        //Check if blocked
+        if(board.checkPos(Board.calcPos(getPlayer(), getPosition(), 0, 1)) == null) {
+            //First move - able to move up two
+            if (getNumMoves() == 0) {
+                if(board.checkPos(Board.calcPos(getPlayer(), getPosition(), 0, 2)) == null) {
+                    moves.add(Board.calcPos(getPlayer(), getPosition(), 0, 2));
+                }
+            }
+            moves.add(Board.calcPos(getPlayer(), getPosition(), 0, 1));
         }
-        moves.add(Board.calcPos(getPlayer(), getPosition(), 0, 1));
         if(board.checkPos(Board.calcPos(getPlayer(), getPosition(), 1, 1)).getPlayer() != getPlayer()) {
             moves.add(Board.calcPos(getPlayer(), getPosition(), 1, 1));
         }
