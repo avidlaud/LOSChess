@@ -7,7 +7,7 @@ public class Board {
     public final static int MAX_RANK = 8;
     public final static int MAX_FILE = 8;
 
-    Piece[][] board = new Piece[8][8];
+    private Piece[][] board = new Piece[8][8];
 
     public Board(Player white, Player black) {
         //Initialize pawns
