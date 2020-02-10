@@ -6,7 +6,7 @@ public class Player {
 
     boolean isWhite;
 
-    public ArrayList<Piece> pieces;
+    private ArrayList<Piece> pieces;
 
     public boolean isWhite() {
         return isWhite;
@@ -34,4 +34,7 @@ public class Player {
         this.isWhite = isWhite;
     }
 
+    public ArrayList<Piece> getPieces() {
+        return pieces;
+    }
 }

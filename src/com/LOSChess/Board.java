@@ -12,20 +12,20 @@ public class Board {
     public Board(Player white, Player black) {
         //Initialize pawns
         for(int i = 0; i <= 7; i++) { // changed from 1-8 to 0-7 b/c didnt work with 1-8
-            board[i][Pawn.WHITESTARTRANK-1] = new Pawn(i, white);
-            board[i][Pawn.BLACKSTARTRANK-1] = new Pawn(i, black);
+            board[i][Pawn.WHITESTARTRANK-1] = new Pawn(i+1, white);
+            board[i][Pawn.BLACKSTARTRANK-1] = new Pawn(i+1, black);
         }
         //Initialize rooks
-        board[0][0] = new Rook(0, white);
-        board[7][0] = new Rook(7, black);
-        board[0][7] = new Rook(0, white);
-        board[7][7] = new Rook(7, black);
+        board[0][0] = new Rook(1, white);
+        board[7][0] = new Rook(8, black);
+        board[0][7] = new Rook(1, white);
+        board[7][7] = new Rook(8, black);
         //Initialize knights
 
-        board[1][0] = new Knight(1, white);
-        board[6][0] = new Knight(6, white);
-        board[1][7] = new Knight(1, black);
-        board[6][7] = new Knight(6, black);
+        board[1][0] = new Knight(2,1, white);
+        board[6][0] = new Knight(7,1, white);
+        board[1][7] = new Knight(2,8, black);
+        board[6][7] = new Knight(7,8, black);
         //Initialize bishops
         board[2][0] = new Bishop(2, white);
         board[5][0] = new Bishop(5, white);
@@ -44,8 +44,9 @@ public class Board {
     private int[] pieceIndexing(int[] input) {
         return new int[]{input[0]-1, input[1] -1};
     }
+
     public void printBoard(){ //added printBoard for the driver
-        Player temp = new Player();
+        //Player temp = new Player();
         char[][] dispBoard = new char[8][8];
         for(int rank = 0; rank<board.length; rank++){
             for(int file = 0; file<board[rank].length; file++){
@@ -120,6 +121,21 @@ public class Board {
         board[piece.getFile()][piece.getRank()] = null;
         piece.setPosition(destination);
         board[destination[0]][destination[1]] = piece;
+    }
+
+    /**
+     * Determine if a position is under attack, used for prohibiting King moves
+     * @param enemyPlayer The target player whose pieces attack the position
+     * @param position The position on the board to check
+     * @return True if under attack by enemyPlayer, false otherwise
+     */
+    public boolean underAttack(Player enemyPlayer, int[] position) {
+        for (Piece p : enemyPlayer.getPieces()) {
+            if(p.getMoves(this).contains(position)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
