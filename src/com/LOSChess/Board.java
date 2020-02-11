@@ -7,6 +7,9 @@ public class Board {
     public final static int MAX_RANK = 8;
     public final static int MAX_FILE = 8;
 
+    private Player white;
+    private Player black;
+
     private Piece[][] board = new Piece[8][8];
 
     public Board(Player white, Player black) {
@@ -35,10 +38,11 @@ public class Board {
         board[3][0] = new Queen(3, white);
         board[3][7] = new Queen(3, black);
         //Initialize kings
-        board[4][0] = new King(4, white);
-        board[4][7] = new King(4, black);
+        board[4][0] = new King(5, 1, white);
+        board[4][7] = new King(5, 8, black);
 
-
+        this.white = white;
+        this.black = black;
     }
 
     private int[] pieceIndexing(int[] input) {
@@ -62,6 +66,13 @@ public class Board {
             }
             System.out.println();
         }
+    }
+
+    public Player getEnemy(Piece piece) {
+        if(piece.getPlayer() == white) {
+            return black;
+        }
+        return white;
     }
 
     /**
