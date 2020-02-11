@@ -8,7 +8,7 @@ public class Knight extends Piece{
     /**
      * List of all valid knight moves
      */
-    private static final List<int[]> jumps = new ArrayList<int[]>() {
+    private static final List<int[]> standardMoves = new ArrayList<int[]>() {
         {
             add(new int[]{1,2});
             add(new int[]{-1, 2});
@@ -28,7 +28,7 @@ public class Knight extends Piece{
     @Override
     public ArrayList<int[]> getMoves(Board board) {
         ArrayList<int[]> moves = new ArrayList<>();
-        for(int[] i : jumps) {
+        for(int[] i : standardMoves) {
             if((board.checkPos(Board.calcPos(getPlayer(), getPosition(), i[0], i[1])) == null)
                 || (board.checkPos(Board.calcPos(getPlayer(), getPosition(), i[0], i[1])).getPlayer() != getPlayer())) {
                 moves.add(Board.calcPos(getPlayer(), getPosition(), i[0], i[1]));
