@@ -35,4 +35,32 @@ public class King extends Piece{
         }
         return moves;
     }
+
+    public boolean canCastle(Board board) {
+        if(this.getNumMoves() != 0) {
+            return false;
+        }
+        //Find rooks
+        ArrayList<Piece> rooks = new ArrayList<>();
+        for(Piece p : this.getPlayer().getPieces()) {
+            if(p instanceof Rook) {
+                rooks.add(p);
+            }
+        }
+        if(rooks.size() != 2) {
+            return false;
+        }
+        for(Piece r : rooks) {
+            if (r.getNumMoves() != 0) {
+                return false;
+            }
+        }
+        //King side castle
+        if(this.getPlayer().isWhite()) { //Check the first rank
+            if(board.checkPos(new int[] {2,1}) == null && board.checkPos(new int[] {3,1}) == null) {
+                return true;
+            }
+        }
+        return true;
+    }
 }
